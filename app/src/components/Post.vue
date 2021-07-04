@@ -2,7 +2,7 @@
   <section class="posts">
     <h2>Posts from SF5 API (axios):</h2>
 
-    <p v-if="loading">Still loading..</p>
+    <p v-if="loading">Loading…</p>
     <p v-if="error">{{ error }}</p>
 
     <div class="thumbnails" v-if="!loading && data && data.length">
