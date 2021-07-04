@@ -1,6 +1,6 @@
 <template>
   <section class="posts">
-    <h2>Posts from SF5 API:</h2>
+    <h2>Posts from SF5 API (fetch):</h2>
 
     <p v-if="loading">Still loading..</p>
     <p v-if="error">{{ error }}</p>
