@@ -1,6 +1,6 @@
 <template>
   <section class="posts">
-    <h2>Posts from SF5 API (fetch):</h2>
+    <h2>Posts from SF5 API (axios):</h2>
 
     <p v-if="loading">Still loading..</p>
     <p v-if="error">{{ error }}</p>
@@ -25,6 +25,8 @@
 
 <script>
 import { ref, onMounted } from "vue";
+import axios from "axios";
+
 export default {
   name: "Posts",
   props: {},
@@ -35,41 +37,15 @@ export default {
 
     function fetchData() {
       loading.value = true;
-      // I prefer to use fetch
-      // you can use use axios as an alternative
-      return fetch("http://localhost:8088/api", {
-        method: "get",
-        headers: {
-          "content-type": "application/json",
-        },
-      })
-        .then((res) => {
-          // a non-200 response code
-          if (!res.ok) {
-            // create error instance with HTTP status text
-            const error = new Error(res.statusText);
-            error.json = res.json();
-            throw error;
-          }
-
-          return res.json();
-        })
-        .then((json) => {
-          // set the response data
-          data.value = json;
+      return axios
+        .get("http://localhost:8088/api")
+        .then((response) => {
+          loading.value = false;
+          data.value = response.data;
         })
         .catch((err) => {
-          error.value = err;
-          // In case a custom JSON error response was provided
-          if (err.json) {
-            return err.json.then((json) => {
-              // set the JSON response message
-              error.value.message = json.message;
-            });
-          }
-        })
-        .then(() => {
           loading.value = false;
+          error.value = err.message;
         });
     }
 
