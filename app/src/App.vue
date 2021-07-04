@@ -2,19 +2,18 @@
   <main>
     <header>
       <h1>Vue3 API Frontend</h1>
+      <div id="nav">
+        <router-link :to="{ name: 'home' }">Home</router-link>
+      </div>
     </header>
-    <Post />
+    <router-view />
   </main>
 </template>
 
 <script>
-import Post from "@/components/Post";
-
 export default {
   name: "App",
-  components: {
-    Post,
-  },
+  components: {},
 };
 </script>
 
@@ -30,6 +29,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+}
+
+header a {
+  color: #ffffff;
 }
 
 section {

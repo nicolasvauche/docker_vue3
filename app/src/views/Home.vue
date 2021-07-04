@@ -1,6 +1,6 @@
 <template>
   <section class="posts">
-    <h2>Posts from SF5 API (axios):</h2>
+    <h2>Posts from SF5 API:</h2>
 
     <p v-if="loading">Loading…</p>
     <p v-if="error">{{ error }}</p>
@@ -8,9 +8,15 @@
     <div class="thumbnails" v-if="!loading && data && data.length">
       <div class="thumbnail" v-for="post of data" :key="post.id">
         <figure class="thumbnail-image">
-          <img :src="post.image" :alt="post.title" />
+          <router-link :to="{ name: 'post', params: { id: post.id } }">
+            <img :src="post.image" :alt="post.title" />
+          </router-link>
         </figure>
-        <h3 class="thumbnail-title">{{ post.title }}</h3>
+        <h3 class="thumbnail-title">
+          <router-link :to="{ name: 'post', params: { id: post.id } }">
+            {{ post.title }}
+          </router-link>
+        </h3>
         <p class="thumbnail-excerpt">
           {{
             post.content.length > 75
@@ -62,7 +68,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .thumbnails {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -78,6 +84,12 @@ export default {
 
 .thumbnail-image {
   margin: 0;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.thumbnail-image a {
+  display: block;
   height: 150px;
   overflow: hidden;
   border-top-left-radius: 0.5rem;
@@ -103,6 +115,10 @@ export default {
 
 .thumbnail-title {
   padding: 0 0.5rem;
+}
+
+a {
+  color: #2c3e50;
 }
 
 .thumbnail-excerpt {
