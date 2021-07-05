@@ -16,10 +16,15 @@
 
 <style scoped>
 header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0.25rem 1.5rem 0;
+  padding: 0 1.5rem;
   background-color: #06121e;
 }
 

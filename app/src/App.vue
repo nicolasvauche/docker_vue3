@@ -1,17 +1,20 @@
 <template>
+  <Header />
   <main>
-    <Header />
     <router-view />
   </main>
+  <Footer />
 </template>
 
 <script>
 import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
 
 export default {
   name: "App",
   components: {
     Header,
+    Footer,
   },
 };
 </script>
@@ -28,6 +31,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+}
+
+main {
+  margin-top: 5.5rem;
 }
 
 section {
